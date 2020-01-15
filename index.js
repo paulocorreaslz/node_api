@@ -26,9 +26,23 @@ server.listen(8082, function () {
 });
 
 // Rotas
-// rota principal
+// Rota inicial de teste.
 server.get('/', (requisition, response, next) => {  
+    response.send('Servidor online');
+});
+
+// rota de busca de usuarios
+server.get('/user', (requisition, response, next) => {  
     knex('tbluser').then((data) => {
+        response.send(data);
+    }, next)
+});
+
+// rota para insercao
+server.post('/user/inserir', (requisition, response, next) => {  
+    knex('tbluser')
+    .insert(requisition.body)
+    .then((data) => {
         response.send(data);
     }, next)
 });
