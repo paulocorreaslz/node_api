@@ -24,3 +24,11 @@ server.use(restify.plugins.bodyParser());
 server.listen(8082, function () {
   console.log('%s Ouvindo porta %s', server.name, server.url);
 });
+
+// Rotas
+// rota principal
+server.get('/', (requisition, response, next) => {  
+    knex('tbluser').then((data) => {
+        response.send(data);
+    }, next)
+});
